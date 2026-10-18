@@ -6,7 +6,6 @@ import com.relieveslondono.gestion.proveedor.dto.ProveedorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -27,11 +26,14 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/proveedores")
-@RequiredArgsConstructor
 @Tag(name = "Proveedores", description = "Gestión de los proveedores de materiales del taller")
 public class ProveedorController {
 
     private final ProveedorService proveedorService;
+
+    public ProveedorController(ProveedorService proveedorService) {
+        this.proveedorService = proveedorService;
+    }
 
     @Operation(summary = "Listar proveedores",
             description = "Devuelve los proveedores paginados. Si se envía 'nombre', filtra los que lo contienen "

@@ -2,7 +2,6 @@ package com.relieveslondono.gestion.usuario;
 
 import com.relieveslondono.gestion.common.RecursoNoEncontradoException;
 import com.relieveslondono.gestion.usuario.dto.UsuarioResponse;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,11 +11,15 @@ import java.util.Locale;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
+
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+        this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Transactional(readOnly = true)
     public UsuarioResponse obtenerPorEmail(String email) {

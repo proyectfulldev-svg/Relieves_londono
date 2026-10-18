@@ -3,17 +3,19 @@ package com.relieveslondono.gestion.proveedor;
 import com.relieveslondono.gestion.common.RecursoNoEncontradoException;
 import com.relieveslondono.gestion.proveedor.dto.ProveedorRequest;
 import com.relieveslondono.gestion.proveedor.dto.ProveedorResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 public class ProveedorService {
 
     private final ProveedorRepository proveedorRepository;
+
+    public ProveedorService(ProveedorRepository proveedorRepository) {
+        this.proveedorRepository = proveedorRepository;
+    }
 
     @Transactional
     public ProveedorResponse crearProveedor(ProveedorRequest request) {

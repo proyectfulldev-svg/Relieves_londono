@@ -4,7 +4,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -21,7 +20,6 @@ import java.io.IOException;
  * deja al usuario autenticado para esta petición. Si no, la petición sigue sin autenticar y
  * Spring Security responde 401 en las rutas protegidas.
  */
-@RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     /** Atributo de la petición donde se guarda por qué no se aceptó el token, para el mensaje del 401. */
@@ -31,6 +29,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UsuarioDetailsService usuarioDetailsService;
+
+    public JwtAuthFilter(JwtService jwtService, UsuarioDetailsService usuarioDetailsService) {
+        this.jwtService = jwtService;
+        this.usuarioDetailsService = usuarioDetailsService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

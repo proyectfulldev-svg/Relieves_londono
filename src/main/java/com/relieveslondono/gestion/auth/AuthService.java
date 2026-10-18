@@ -6,13 +6,11 @@ import com.relieveslondono.gestion.security.JwtService;
 import com.relieveslondono.gestion.security.TokenGenerado;
 import com.relieveslondono.gestion.usuario.UsuarioService;
 import com.relieveslondono.gestion.usuario.dto.UsuarioResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class AuthService {
 
     private static final String TIPO_TOKEN = "Bearer";
@@ -20,6 +18,13 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final UsuarioService usuarioService;
+
+    public AuthService(AuthenticationManager authenticationManager, JwtService jwtService,
+                       UsuarioService usuarioService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
+        this.usuarioService = usuarioService;
+    }
 
     /**
      * Comprueba email y contraseña (y que el usuario esté activo) y genera el token.
