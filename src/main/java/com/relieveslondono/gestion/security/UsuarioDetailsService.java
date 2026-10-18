@@ -3,7 +3,6 @@ package com.relieveslondono.gestion.security;
 import com.relieveslondono.gestion.usuario.Usuario;
 import com.relieveslondono.gestion.usuario.UsuarioRepository;
 import com.relieveslondono.gestion.usuario.UsuarioService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,10 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
  * Le dice a Spring Security cómo cargar un usuario de la tabla usuarios a partir de su email.
  */
 @Service
-@RequiredArgsConstructor
 public class UsuarioDetailsService implements UserDetailsService {
 
     private final UsuarioRepository usuarioRepository;
+
+    public UsuarioDetailsService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)
